@@ -2,9 +2,10 @@ name: Release
 
 # A v<version> tag is the release. It publishes the package to npm with a provenance statement, which n8n
 # requires of every verified community node: `npm run release` inside GitHub Actions runs `n8n-node release`,
-# which lints, builds and publishes with provenance. npm's trusted publishing names this workflow, so no
-# token is stored. Then the version's CHANGELOG.md section becomes the tag's GitHub Release, and a re-run
-# edits the release rather than failing on it.
+# which lints, builds and publishes with provenance. npm takes a trusted publisher only for a package that
+# exists, so the first publish uses the org's NPM_TOKEN; once this workflow is the package's trusted
+# publisher, it needs none. Then the version's CHANGELOG.md section becomes the tag's GitHub Release, and a
+# re-run edits the release rather than failing on it.
 on:
   push:
     tags: ['v*.*.*']
@@ -26,7 +27,12 @@ jobs:
           node-version: 'lts/*'
           cache: 'npm'
       - run: npm ci
-      - run: npm run release
+      - name: Publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          [ -z "$NPM_TOKEN" ] || npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
+          npm run release
 
   github-release:
     needs: publish
