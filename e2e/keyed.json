@@ -1,0 +1,23 @@
+{
+  "id": "e2eKeyed000001",
+  "name": "internetdata keyed",
+  "active": false,
+  "settings": {},
+  "connections": {
+    "Start": {"main": [[{"node": "IP", "type": "main", "index": 0}]]},
+    "IP": {"main": [[{"node": "Bad IP", "type": "main", "index": 0}]]},
+    "Bad IP": {"main": [[{"node": "Bad key", "type": "main", "index": 0}]]}
+  },
+  "nodes": [
+    {"id": "b1", "name": "Start", "type": "n8n-nodes-base.manualTrigger", "typeVersion": 1, "position": [0, 0], "parameters": {}},
+    {"id": "b2", "name": "IP", "type": "n8n-nodes-internetdata.internetData", "typeVersion": 1, "position": [200, 0],
+     "parameters": {"authentication": "apiKey", "resource": "ip", "operation": "lookup", "ip": "146.70.116.130"},
+     "credentials": {"internetDataApi": {"id": "e2eKey00000001", "name": "InternetData key"}}},
+    {"id": "b3", "name": "Bad IP", "type": "n8n-nodes-internetdata.internetData", "typeVersion": 1, "position": [400, 0],
+     "onError": "continueRegularOutput", "parameters": {"authentication": "apiKey", "resource": "ip", "operation": "lookup", "ip": "not-an-ip"},
+     "credentials": {"internetDataApi": {"id": "e2eKey00000001", "name": "InternetData key"}}},
+    {"id": "b4", "name": "Bad key", "type": "n8n-nodes-internetdata.internetData", "typeVersion": 1, "position": [600, 0],
+     "onError": "continueRegularOutput", "parameters": {"authentication": "apiKey", "resource": "ip", "operation": "lookup", "ip": "8.8.8.8"},
+     "credentials": {"internetDataApi": {"id": "e2eKey00000002", "name": "Not a key"}}}
+  ]
+}

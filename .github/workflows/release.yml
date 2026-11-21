@@ -1,0 +1,53 @@
+name: Release
+
+# A v<version> tag is the release. It publishes the package to npm with a provenance statement, which n8n
+# requires of every verified community node: `npm run release` inside GitHub Actions runs `n8n-node release`,
+# which lints, builds and publishes with provenance. npm's trusted publishing names this workflow, so no
+# token is stored. Then the version's CHANGELOG.md section becomes the tag's GitHub Release, and a re-run
+# edits the release rather than failing on it.
+on:
+  push:
+    tags: ['v*.*.*']
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: The tag names package.json's version
+        run: |
+          v="${GITHUB_REF_NAME#v}"
+          [ "$(jq -r .version package.json)" = "$v" ] || { echo "${GITHUB_REF_NAME} is not package.json's version"; exit 1; }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run release
+
+  github-release:
+    needs: publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: GitHub Release from CHANGELOG.md
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          v="${GITHUB_REF_NAME#v}"
+          awk -v v="$v" '/^## /{ if (found) exit; found = ($2 == v); next } found' CHANGELOG.md > notes.md
+          if ! grep -q '^### ' notes.md ; then
+            echo "CHANGELOG.md has no section for ${v}" >&2
+            exit 1
+          fi
+          if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1 ; then
+            gh release edit "$GITHUB_REF_NAME" --notes-file notes.md
+          else
+            gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --notes-file notes.md --verify-tag
+          fi

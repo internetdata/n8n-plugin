@@ -1,0 +1,23 @@
+{
+  "id": "e2eKeyless0001",
+  "name": "internetdata keyless",
+  "active": false,
+  "settings": {},
+  "connections": {
+    "Start": {"main": [[{"node": "IP", "type": "main", "index": 0}]]},
+    "IP": {"main": [[{"node": "IPv6", "type": "main", "index": 0}]]},
+    "IPv6": {"main": [[{"node": "AS", "type": "main", "index": 0}]]},
+    "AS": {"main": [[{"node": "Domain", "type": "main", "index": 0}]]}
+  },
+  "nodes": [
+    {"id": "a1", "name": "Start", "type": "n8n-nodes-base.manualTrigger", "typeVersion": 1, "position": [0, 0], "parameters": {}},
+    {"id": "a2", "name": "IP", "type": "n8n-nodes-internetdata.internetData", "typeVersion": 1, "position": [200, 0],
+     "parameters": {"resource": "ip", "operation": "lookup", "ip": "8.8.8.8"}},
+    {"id": "a3", "name": "IPv6", "type": "n8n-nodes-internetdata.internetData", "typeVersion": 1, "position": [400, 0],
+     "parameters": {"resource": "ip", "operation": "lookup", "ip": "2606:4700:4700::1111"}},
+    {"id": "a4", "name": "AS", "type": "n8n-nodes-internetdata.internetData", "typeVersion": 1, "position": [600, 0],
+     "parameters": {"resource": "asn", "operation": "lookup", "asn": "AS13335"}},
+    {"id": "a5", "name": "Domain", "type": "n8n-nodes-internetdata.internetData", "typeVersion": 1, "position": [800, 0],
+     "parameters": {"resource": "domain", "operation": "lookup", "domain": "github.com"}}
+  ]
+}

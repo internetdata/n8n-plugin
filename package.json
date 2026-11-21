@@ -1,0 +1,57 @@
+{
+    "name": "n8n-nodes-internetdata",
+    "version": "0.1.0",
+    "description": "Look up IP addresses, ASNs and domains in InternetData from n8n workflows.",
+    "license": "MIT",
+    "homepage": "https://internetdata.io",
+    "keywords": [
+        "n8n-community-node-package",
+        "n8n",
+        "internetdata",
+        "ip-lookup",
+        "ip-geolocation",
+        "asn",
+        "domain",
+        "threat-intelligence"
+    ],
+    "author": {
+        "name": "InternetData",
+        "email": "support@internetdata.io"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/internetdata/n8n-plugin.git"
+    },
+    "scripts": {
+        "build": "n8n-node build",
+        "build:watch": "tsc --watch",
+        "dev": "n8n-node dev",
+        "lint": "n8n-node lint",
+        "lint:fix": "n8n-node lint --fix",
+        "release": "n8n-node release",
+        "prepublishOnly": "n8n-node prerelease"
+    },
+    "files": [
+        "dist"
+    ],
+    "n8n": {
+        "n8nNodesApiVersion": 1,
+        "strict": true,
+        "credentials": [
+            "dist/credentials/InternetDataApi.credentials.js"
+        ],
+        "nodes": [
+            "dist/nodes/InternetData/InternetData.node.js"
+        ]
+    },
+    "devDependencies": {
+        "@n8n/node-cli": "^0.57.3",
+        "eslint": "^9.39.5",
+        "prettier": "^3.10.1",
+        "release-it": "^21.0.3",
+        "typescript": "^5.9.3"
+    },
+    "peerDependencies": {
+        "n8n-workflow": "*"
+    }
+}
