@@ -8,7 +8,8 @@ const runData = JSON.parse(text.slice(text.indexOf('\n{') + 1)).data.resultData.
 let failed = 0;
 
 const checks = kind === 'keyed' ? [
-    ['IP', (j) => j.ip === '146.70.116.130' && typeof j.is_vpn === 'boolean', 'a key answers is_vpn'],
+    // A plan whose paid fields are spent answers trial_expired in their place; a keyless answer never carries it.
+    ['IP', (j) => j.ip === '146.70.116.130' && (typeof j.is_vpn === 'boolean' || j.trial_expired === true), 'a key answers is_vpn, or trial_expired once its plan is spent'],
     ['Bad IP', (j) => typeof j.error === 'string' && j.error !== '', 'a bad address is an error item'],
     ['Bad key', (j) => /401|invalid API key|Authorization failed/i.test(j.error ?? ''), 'a bad key answers 401'],
 ] : [
