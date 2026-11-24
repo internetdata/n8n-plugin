@@ -11,7 +11,7 @@
 
 set -euo pipefail
 
-NODE_IMAGE="node:24.12.0"
+NODE_IMAGE="node:24.15.0-bookworm"
 N8N_IMAGE="n8nio/n8n:2.48.7"
 PKG="n8n-nodes-internetdata"
 
