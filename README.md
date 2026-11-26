@@ -9,7 +9,7 @@ It looks up an IP address, an AS or a domain in a workflow, and works with no ke
 
 ## Getting Started
 
-In n8n, open Settings > Community Nodes, choose Install, and enter `n8n-nodes-internetdata`. Then add the InternetData node to a workflow. Self-hosted n8n can also take it with `npm install n8n-nodes-internetdata` in `~/.n8n/nodes`.
+In n8n, open Settings > Community Nodes, choose Install, and enter `n8n-nodes-internetdata`. Then add the InternetData node to a workflow. Self-hosted n8n can also take it with `npm install --legacy-peer-deps n8n-nodes-internetdata` in `~/.n8n/nodes`: without that flag, npm also installs n8n's own `n8n-workflow`, whose native module fails to build in n8n's Docker image.
 
 ## Operations
 
