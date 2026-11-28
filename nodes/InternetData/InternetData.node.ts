@@ -44,13 +44,13 @@ export class InternetData implements INodeType {
                     {
                         name: 'None',
                         value: 'none',
-                        description: 'Unlimited, the free plan: location, network, company, abuse contact, ' +
-                            'Tor, relays and the service flags',
+                        description: 'No key needed to try it. An IP answers its country, AS, company, ' +
+                            'abuse contact, hostname, Tor, relays, anycast and bogon',
                     },
                     {
                         name: 'API Key',
                         value: 'apiKey',
-                        description: 'Every field your plan includes',
+                        description: 'A paid plan or a free key\'s full answers',
                     },
                 ],
                 default: 'none',

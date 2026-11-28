@@ -5,7 +5,7 @@
 
 The official [InternetData](https://internetdata.io) node for [n8n](https://n8n.io).
 
-It looks up an IP address, an AS or a domain in a workflow, and works with no key on Unlimited, the free plan.
+It looks up an IP address, an AS or a domain in a workflow. No key is needed to try it, and a free key answers more ([pricing](https://internetdata.io/pricing)).
 
 ## Getting Started
 
@@ -15,9 +15,9 @@ In n8n, open Settings > Community Nodes, choose Install, and enter `n8n-nodes-in
 
 | Resource | Operation | Answers |
 |---|---|---|
-| IP Address | Look Up | Country, network, company, abuse contact, reverse DNS, Tor, relays and the service flags with no key; VPNs, proxies, hosting, city-level location and the rest with one |
-| Autonomous System | Look Up | The AS's registration with no key; its prefixes, peers, upstreams and the domains it hosts with one |
-| Domain | Look Up | Whether it's registered and which record types it has with no key; the records, their networks and more with one |
+| IP Address | Look Up | Country, the AS without its type, company, abuse contact, reverse DNS, Tor, relays, anycast and bogon with no key; VPNs, proxies, hosting, bots, carrier, satellite, the service flags, city-level location and the rest with a paid plan or a free key's full answers |
+| Autonomous System | Look Up | The AS's name, country, registry, allocation date and domain with no key; its type, prefixes, peers, upstreams and the domains it hosts with a paid plan or a free key's full answers |
+| Domain | Look Up | Whether it's registered and which record types it has with no key; the records, their networks and more with a paid plan or a free key's full answers |
 
 Each answer is the API's JSON as is, one item per input item. The node is usable as a tool by n8n's AI Agent.
 
@@ -40,7 +40,7 @@ Paste this into an n8n canvas: a manual trigger, then the InternetData node look
 
 ## Credentials
 
-Authentication defaults to None, which answers the free plan's fields. For every field your plan includes, set Authentication to API Key and create an InternetData API credential with a key from the [console](https://app.internetdata.io), with the Lookups scope. The credential's test checks the key without spending a lookup.
+Authentication defaults to None, which needs no key and answers the fields in the table above. For a paid plan's or a free key's full answers, set Authentication to API Key and create an InternetData API credential with a key from the [console](https://app.internetdata.io), with the Lookups scope. The credential's test checks the key without spending a lookup.
 
 ## Compatibility
 
