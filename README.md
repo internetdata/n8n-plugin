@@ -15,7 +15,7 @@ In n8n, open Settings > Community Nodes, choose Install, and enter `n8n-nodes-in
 
 | Resource | Operation | Answers |
 |---|---|---|
-| IP Address | Look Up | Country, the AS without its type, company, abuse contact, reverse DNS, Tor, relays, anycast and bogon with no key; VPNs, proxies, hosting, bots, carrier, satellite, the service flags, city-level location and the rest with a paid plan or a free key's full answers |
+| IP Address | Look Up | Country, the AS without its type, reverse DNS, Tor, relays, anycast and bogon with no key; the company, the abuse contact, VPNs, proxies, hosting, bots, carrier, satellite, the service flags, city-level location and the rest with a paid plan or a free key's full answers |
 | Autonomous System | Look Up | The AS's name, country, registry, allocation date and domain with no key; its type, prefixes, peers, upstreams and the domains it hosts with a paid plan or a free key's full answers |
 | Domain | Look Up | Whether it's registered and which record types it has with no key; the records, their networks and more with a paid plan or a free key's full answers |
 

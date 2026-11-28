@@ -44,8 +44,8 @@ export class InternetData implements INodeType {
                     {
                         name: 'None',
                         value: 'none',
-                        description: 'No key needed to try it. An IP answers its country, AS, company, ' +
-                            'abuse contact, hostname, Tor, relays, anycast and bogon',
+                        description: 'No key needed to try it. An IP answers its country, AS, hostname, ' +
+                            'Tor, relays, anycast and bogon',
                     },
                     {
                         name: 'API Key',
